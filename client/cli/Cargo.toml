@@ -1,0 +1,54 @@
+[package]
+name = "ac-cli"
+version = "0.1.0"
+authors = ["mmacedoeu <contato@mmacedo.eu.org>"]
+description = "CLI interface."
+edition = "2018"
+license = "GPL-3.0-or-later WITH Classpath-exception-2.0"
+readme = "README.md"
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+log = "0.4.11"
+regex = "1.4.2"
+tokio = { version = "0.2.21", features = [ "signal", "rt-core", "rt-threaded", "blocking" ] }
+futures = "0.3.9"
+fdlimit = "0.2.1"
+libp2p = "0.36.0"
+parity-scale-codec = "2.0.0"
+hex = "0.4.2"
+rand = "0.7.3"
+tiny-bip39 = "0.8.0"
+serde_json = "1.0.41"
+ac-keystore = { version = "0.1.0", path = "../keystore" }
+sp-panic-handler = { version = "3.0.0"}
+# sc-client-api = { version = "3.0.0", path = "../api" }
+# sp-blockchain = { version = "3.0.0", path = "../../primitives/blockchain" }
+ac-network = { version = "0.1.0", path = "../network" }
+ap-runtime = { version = "0.1.0", path = "../../primitives/runtime" }
+sp-utils = { version = "3.0.0"}
+# sp-version = { version = "3.0.0"}
+ap-core = { version = "0.1.0", path = "../../primitives/core" }
+ap-keystore = { version = "0.1.0", path = "../../primitives/keystore" }
+ac-service = { version = "0.1.0", default-features = false, path = "../service" }
+sc-telemetry = { version = "3.0.0"}
+# sp-keyring = { version = "3.0.0"}
+names = "0.11.0"
+structopt = "0.3.8"
+sc-tracing = { version = "3.0.0"}
+chrono = "0.4.10"
+serde = "1.0.111"
+thiserror = "1.0.21"
+
+[target.'cfg(not(target_os = "unknown"))'.dependencies]
+rpassword = "5.0.0"
+
+[dev-dependencies]
+tempfile = "3.1.0"
+
+# [features]
+# wasmtime = [
+# 	"sc-service/wasmtime",
+# ]

@@ -1,0 +1,65 @@
+[package]
+name = "ap-io"
+version = "0.1.0"
+authors = ["Parity Technologies <admin@parity.io>"]
+edition = "2018"
+license = "Apache-2.0"
+description = "I/O for Substrate runtimes"
+readme = "README.md"
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+
+[dependencies]
+codec = { package = "parity-scale-codec", version = "2.0.0", default-features = false }
+hash-db = { version = "0.15.2", default-features = false }
+ap-core = { version = "0.1.0", default-features = false, path = "../core" }
+ap-keystore = { version = "0.1.0", default-features = false, optional = true, path = "../keystore" }
+sp-std = { version = "3.0.0", default-features = false }
+libsecp256k1 = { version = "0.3.4", optional = true }
+ap-state-machine = { version = "0.1.0", optional = true, path = "../state-machine" }
+sp-wasm-interface = { version = "3.0.0", default-features = false }
+sp-runtime-interface = { version = "3.0.0", default-features = false}
+ap-trie = { version = "0.1.0", optional = true, path = "../trie"}
+sp-externalities = { version = "0.9.0", optional = true}
+sp-tracing = { version = "3.0.0", default-features = false}
+log = { version = "0.4.8", optional = true }
+futures = { version = "0.3.1", features = ["thread-pool"], optional = true }
+parking_lot = { version = "0.11.1", optional = true }
+tracing = { version = "0.1.22", default-features = false }
+tracing-core = { version = "0.1.17", default-features = false}
+
+[features]
+default = ["std"]
+std = [
+	"ap-core/std",
+	"ap-keystore",
+	"codec/std",
+	"sp-std/std",
+	"hash-db/std",
+	"ap-trie",
+	"ap-state-machine",
+	"libsecp256k1",
+	"sp-runtime-interface/std",
+	"sp-externalities",
+	"sp-wasm-interface/std",
+	"sp-tracing/std",
+	"tracing/std",
+	"tracing-core/std",
+	"log",
+	"futures",
+	"parking_lot",
+]
+
+with-tracing = [
+	"sp-tracing/with-tracing"
+]
+
+# These two features are used for `no_std` builds for the environments which already provides
+# `#[panic_handler]`, `#[alloc_error_handler]` and `#[global_allocator]`.
+#
+# For the regular wasm runtime builds those are not used.
+disable_panic_handler = []
+disable_oom = []
+disable_allocator = []
